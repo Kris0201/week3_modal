@@ -87,10 +87,10 @@
                 </div>
                 <div>
                   <h4>多圖設置</h4>
-                  <template v-for="(img, key) in tempProduct.imageUrl" :key="key + 1235">
-                    <input type="text" class="form-control" v-model="tempProduct.imageUrl[key]">
+                  <template v-for="(img, key) in tempProduct.imagesUrl" :key="key + 1235">
+                    <input type="text" class="form-control" v-model="tempProduct.imagesUrl[key]">
                     <!-- 欲調整陣列中的原始值時，要以陣列索引的方式處理才能避免傳參考問題，直接寫 img 的話是無法進行調整的 -->
-                    <img :src="tempProduct.imageUrl[key]" alt="" class="img-fluid">
+                    <img :src="tempProduct.imagesUrl[key]" alt="" class="img-fluid">
                   </template>
 
                   <button class="btn btn-outline-primary btn-sm d-block w-100">
