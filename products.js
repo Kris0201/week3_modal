@@ -24,7 +24,7 @@ const app = {
         return {
             products: [],
             tempProduct: { // 新增產品，因產品有多個屬性，以物件方式包覆
-                imageUrl: [],
+                imagesUrl: [],
             },
             isNew: false, // 確認是「編輯」或「新增」所使用的
 
@@ -66,13 +66,16 @@ const app = {
                 this.isNew = true;
                 // 帶入初始化資料
                 this.tempProduct = {
-                    imageUrl: [],
+                    imagesUrl: [],
                 };
             } else if (status === 'edit') {
                 productModal.show();
                 this.isNew = false;
                 // 帶入當前要編輯的資料
                 this.tempProduct = { ...product }; // 展開以避免在按下「確定」前就編輯
+            } else if(status==='delete'){
+                delProductModal.show();
+                this.tempProduct = { ...product }; // 為了取得 id
             }
 
         },
@@ -102,6 +105,13 @@ const app = {
                     console.log(err)
                 })
 
+        },
+        deleteProduct(){
+           axios.delete(`${apiUrl}v2/api/${apiPath}/admin/product/${this.tempProduct.id}`)
+           .then(res=>{
+            this.getProducts();
+            delProductModal.hide();
+           }) 
         }
 
 
@@ -120,6 +130,8 @@ const app = {
         // 2. 呼叫方法：.show(), .hide()...
         // console.log(bootstrap)
         productModal = new bootstrap.Modal('#productModal');
+
+        delProductModal=new bootstrap.Modal('#delProductModal')
 
     }
 

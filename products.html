@@ -55,7 +55,7 @@
                 <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal('edit', product)">
                   編輯
                 </button>
-                <button type="button" class="btn btn-outline-danger btn-sm">
+                <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('delete', product)">
                   刪除
                 </button>
               </div>
@@ -98,15 +98,16 @@
                     <!-- 判斷新增、刪除出現的時機 -->
                     <!-- 新增：1) 當欄位不為空時可以新增 (陣列的最後一位如果有值才可以新增)，2) 空陣列時可以新增 -->
                     <!-- 刪除：當陣列不為空時才可以刪除 -->
-                    <button class="btn btn-outline-primary btn-sm d-block w-100"
-                      v-if="!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length-1]"
-                      @click="tempProduct.imagesUrl.push('')">
+                 
+                      <button class="btn btn-outline-primary btn-sm d-block w-100"  v-if="!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length-1]" @click="tempProduct.imagesUrl.push('')">
                       新增圖片
-                    </button>
-                    <button class="btn btn-outline-danger btn-sm d-block w-100" v-else
-                      @click="tempProduct.imagesUrl.pop()">
-                      刪除圖片
-                    </button>
+                     </button>
+                  
+                      <button class="btn btn-outline-danger btn-sm d-block w-100" v-else @click="tempProduct.imagesUrl.pop()">
+                        刪除圖片
+                      </button>
+                    
+
                   </div>
 
 
@@ -192,13 +193,13 @@
           </div>
           <div class="modal-body">
             是否刪除
-            <strong class="text-danger"></strong> 商品(刪除後將無法恢復)。
+            <strong class="text-danger">{{tempProduct.title}}</strong> 商品(刪除後將無法恢復)。
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
               取消
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" class="btn btn-danger" @click="deleteProduct">
               確認刪除
             </button>
           </div>
